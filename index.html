@@ -3,219 +3,460 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Твой бьюти-бокс 🎁</title>
+<title>Beauty Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@400;500&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --rose:    #e8c4c4;
+  --sage:    #c4d4c4;
+  --sand:    #e8ddd0;
+  --blush:   #f5ece8;
+  --cream:   #faf7f4;
+  --ink:     #1a1614;
+  --muted:   #8a7f7a;
+  --border:  #e2d8d0;
+}
 
-  :root {
-    --pink: #e8728a;
-    --pink-light: #fce8ed;
-    --pink-dark: #c4536e;
-    --text: #2a1f24;
-    --text-muted: #7a6370;
-    --bg: #fff9fb;
-    --card: #ffffff;
-    --border: #f0d9e0;
-    --radius: 14px;
-  }
+html { scroll-behavior: smooth; }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0 0 60px;
-  }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
 
-  .hero {
-    background: linear-gradient(160deg, #fce8ed 0%, #fff0f5 60%, #fff9fb 100%);
-    padding: 48px 24px 36px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-  }
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 32px 64px;
+  position: relative;
+  background: linear-gradient(170deg, #f0e8e4 0%, #e8ddd8 40%, #ddd4cc 100%);
+  overflow: hidden;
+}
 
-  .hero-ribbon {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--pink-dark);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(120px, 25vw, 220px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.35);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.02em;
+}
 
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 7vw, 40px);
-    font-weight: 400;
-    color: var(--text);
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
 
-  .hero p {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    max-width: 340px;
-    margin: 0 auto;
-  }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 12vw, 96px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
 
-  .petals {
-    font-size: 28px;
-    margin-bottom: 16px;
-    letter-spacing: 4px;
-  }
+.hero h1 em {
+  font-style: italic;
+  color: #7a6060;
+}
 
-  .container {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
+.hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 360px;
+  margin-bottom: 40px;
+}
 
-  .section {
-    margin-top: 32px;
-  }
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  width: fit-content;
+  text-decoration: none;
+}
 
-  .section-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--pink-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 12px;
-  }
+.hero-scroll-line {
+  width: 40px;
+  height: 1px;
+  background: var(--muted);
+  transition: width 0.3s;
+}
 
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+.hero-scroll:hover .hero-scroll-line { width: 70px; }
 
-  .chip {
-    padding: 8px 16px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--card);
-    color: var(--text-muted);
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    transition: all 0.18s;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
+/* ── FORM SECTION ── */
+.form-section {
+  padding: 80px 32px 100px;
+  max-width: 680px;
+  margin: 0 auto;
+}
 
-  .chip:hover { border-color: var(--pink); color: var(--pink-dark); }
+/* ── BLOCK ── */
+.block {
+  margin-bottom: 72px;
+}
 
-  .chip.selected {
-    background: var(--pink-light);
-    border-color: var(--pink);
-    color: var(--pink-dark);
-    font-weight: 500;
-  }
+.block-num {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
 
-  textarea {
-    width: 100%;
-    padding: 14px 16px;
-    border-radius: var(--radius);
-    border: 1.5px solid var(--border);
-    background: var(--card);
-    color: var(--text);
-    font-size: 15px;
-    font-family: 'Inter', sans-serif;
-    resize: none;
-    line-height: 1.6;
-    transition: border-color 0.18s;
-  }
+.block-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
 
-  textarea:focus { outline: none; border-color: var(--pink); }
-  textarea::placeholder { color: #c4aab2; }
+/* ── CHIPS ── */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-  .send-btn {
-    width: 100%;
-    margin-top: 32px;
-    padding: 16px;
-    border-radius: var(--radius);
-    border: none;
-    background: var(--pink);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    transition: background 0.18s, transform 0.1s;
-    letter-spacing: 0.01em;
-  }
+.chip {
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  .send-btn:hover { background: var(--pink-dark); }
-  .send-btn:active { transform: scale(0.98); }
-  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.chip:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
 
-  .status {
-    text-align: center;
-    margin-top: 12px;
-    font-size: 14px;
-    color: var(--text-muted);
-    min-height: 20px;
-  }
+.chip.selected {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
 
-  .success {
-    display: none;
-    text-align: center;
-    padding: 60px 24px;
-  }
+/* ── SKIN CHIPS (colored) ── */
+.chip[data-g="skin"].selected { background: #8a7a6a; border-color: #8a7a6a; }
 
-  .success .big { font-size: 64px; margin-bottom: 20px; }
+/* ── TEXTAREA ── */
+.field-wrap {
+  position: relative;
+}
 
-  .success h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 400;
-    margin-bottom: 10px;
-    color: var(--text);
-  }
+.field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
 
-  .success p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+textarea {
+  width: 100%;
+  padding: 20px 0;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s;
+}
 
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 32px 0 0;
-  }
+textarea::placeholder { color: #c0b8b0; }
+textarea:focus { border-bottom-color: var(--ink); }
+
+/* ── SUBMIT ── */
+.submit-wrap {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.submit-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 7vw, 56px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.send-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 40px;
+  border-radius: 999px;
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-top: 8px;
+}
+
+.send-btn:hover { background: #3a2e2a; transform: translateY(-1px); }
+.send-btn:active { transform: translateY(0); }
+.send-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+.btn-arrow {
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.status {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  min-height: 18px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+  margin: 0 0 72px;
+}
+
+/* ── SUCCESS ── */
+.success {
+  display: none;
+  min-height: 100svh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 32px;
+  background: linear-gradient(160deg, #f0ebe6 0%, #e8e0d8 100%);
+}
+
+.success-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.success h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 10vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.success h2 em { font-style: italic; color: #7a6060; }
+
+.success p {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── COLOR SWATCHES for categories ── */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.swatch {
+  border-radius: 16px;
+  padding: 20px 16px 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.swatch:nth-child(1) { background: #f5e8e8; }
+.swatch:nth-child(2) { background: #e8ede8; }
+.swatch:nth-child(3) { background: #ede8f0; }
+.swatch:nth-child(4) { background: #f0ece4; }
+.swatch:nth-child(5) { background: #e4ecf0; }
+.swatch:nth-child(6) { background: #f0e8f0; }
+.swatch:nth-child(7) { background: #e8f0e8; }
+.swatch:nth-child(8) { background: #f5ede4; }
+
+.swatch-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.swatch-desc {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.swatch.selected {
+  border-color: var(--ink);
+}
+
+.swatch-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.swatch-check svg { width: 10px; height: 10px; }
+
+.swatch.selected .swatch-check { display: flex; }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="petals">🌸 🌷 🌸</div>
-  <div class="hero-ribbon">Специально для тебя</div>
-  <h1>Собери свой<br>бьюти-бокс</h1>
-  <p>Расскажи, что тебе нравится — и скоро тебя ждёт приятный сюрприз</p>
-</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">Beauty</div>
+  <div class="hero-eyebrow">Персональный подбор</div>
+  <h1>Твой<br><em>beauty</em><br>бокс</h1>
+  <p class="hero-sub">Расскажи, что тебе нравится — и скоро тебя ждёт что-то особенное</p>
+  <a class="hero-scroll" href="#form">
+    <div class="hero-scroll-line"></div>
+    Выбрать
+  </a>
+</section>
 
-<div class="container" id="form-view">
+<!-- FORM -->
+<div id="form">
+<section class="form-section" id="form-view">
 
-  <div class="section">
-    <div class="section-label">Что хочешь найти в боксе</div>
-    <div class="chips">
-      <div class="chip" data-g="cat" data-v="Уход за кожей лица">Уход за лицом</div>
-      <div class="chip" data-g="cat" data-v="Уход за телом">Уход за телом</div>
-      <div class="chip" data-g="cat" data-v="Макияж">Макияж</div>
-      <div class="chip" data-g="cat" data-v="Парфюм">Парфюм</div>
-      <div class="chip" data-g="cat" data-v="Уход за волосами">Волосы</div>
-      <div class="chip" data-g="cat" data-v="Маски и патчи">Маски и патчи</div>
-      <div class="chip" data-g="cat" data-v="Инструменты и кисти">Кисти и инструменты</div>
-      <div class="chip" data-g="cat" data-v="Уход за губами">Уход за губами</div>
+  <!-- CATEGORIES -->
+  <div class="block">
+    <div class="block-num">01</div>
+    <div class="block-title">Что хочешь<br>найти внутри?</div>
+    <div class="swatch-grid" id="swatches">
+      <div class="swatch" data-g="cat" data-v="Уход за кожей лица">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Уход за лицом</div>
+        <div class="swatch-desc">Сыворотки, кремы</div>
+      </div>
+      <div class="swatch" data-g="cat" data-v="Уход за телом">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Уход за телом</div>
+        <div class="swatch-desc">Лосьоны, скрабы</div>
+      </div>
+      <div class="swatch" data-g="cat" data-v="Макияж">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Макияж</div>
+        <div class="swatch-desc">Губы, глаза, лицо</div>
+      </div>
+      <div class="swatch" data-g="cat" data-v="Парфюм">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Парфюм</div>
+        <div class="swatch-desc">Ароматы</div>
+      </div>
+      <div class="swatch" data-g="cat" data-v="Уход за волосами">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Волосы</div>
+        <div class="swatch-desc">Маски, масла</div>
+      </div>
+      <div class="swatch" data-g="cat" data-v="Маски и патчи">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Маски и патчи</div>
+        <div class="swatch-desc">Для лица и глаз</div>
+      </div>
+      <div class="swatch" data-g="cat" data-v="Инструменты и кисти">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Кисти и инструменты</div>
+        <div class="swatch-desc">Аксессуары</div>
+      </div>
+      <div class="swatch" data-g="cat" data-v="Уход за губами">
+        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="swatch-name">Уход за губами</div>
+        <div class="swatch-desc">Бальзамы, скрабы</div>
+      </div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <div class="section">
-    <div class="section-label">Предпочтения</div>
+  <!-- PREFERENCES -->
+  <div class="block">
+    <div class="block-num">02</div>
+    <div class="block-title">Твои<br>предпочтения</div>
     <div class="chips">
       <div class="chip" data-g="pref" data-v="Натуральный состав">Натуральный состав</div>
       <div class="chip" data-g="pref" data-v="Корейская косметика">K-beauty</div>
@@ -229,8 +470,10 @@
 
   <div class="divider"></div>
 
-  <div class="section">
-    <div class="section-label">Тип кожи</div>
+  <!-- SKIN TYPE -->
+  <div class="block">
+    <div class="block-num">03</div>
+    <div class="block-title">Тип кожи</div>
     <div class="chips">
       <div class="chip" data-g="skin" data-v="Сухая">Сухая</div>
       <div class="chip" data-g="skin" data-v="Жирная">Жирная</div>
@@ -242,20 +485,34 @@
 
   <div class="divider"></div>
 
-  <div class="section">
-    <div class="section-label">Пожелания — что хочется попробовать?</div>
-    <textarea id="wishes" rows="3" placeholder="Например: хочу что-то с витамином C, или просто порадуй меня 😊"></textarea>
+  <!-- WISHES -->
+  <div class="block">
+    <div class="block-num">04</div>
+    <div class="block-title">Пожелания</div>
+    <div class="field-wrap">
+      <label class="field-label" for="wishes">Расскажи свободно</label>
+      <textarea id="wishes" rows="4" placeholder="Хочу что-то с витамином C, или просто порадуй меня…"></textarea>
+    </div>
   </div>
 
-  <button class="send-btn" id="send-btn" onclick="submitForm()">Отправить пожелания 💌</button>
-  <div class="status" id="status"></div>
+  <!-- SUBMIT -->
+  <div class="submit-wrap">
+    <div class="submit-title">Готово?<br><em>Отправляй.</em></div>
+    <button class="send-btn" id="send-btn" onclick="submitForm()">
+      Отправить пожелания
+      <div class="btn-arrow">→</div>
+    </button>
+    <div class="status" id="status"></div>
+  </div>
 
+</section>
 </div>
 
+<!-- SUCCESS -->
 <div class="success" id="success-view">
-  <div class="big">💝</div>
-  <h2>Пожелания отправлены!</h2>
-  <p>Скоро тебя ждёт<br>что-то очень приятное 🎀</p>
+  <div class="success-eyebrow">Получено</div>
+  <h2>Скоро тебя<br>ждёт <em>сюрприз</em></h2>
+  <p>Пожелания отправлены.<br>Готовься к чему-то особенному 🎀</p>
 </div>
 
 <script>
@@ -264,18 +521,18 @@ const CHAT_ID = '285305161';
 
 const sel = { cat: [], pref: [], skin: [] };
 
-document.querySelectorAll('.chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    const g = chip.dataset.g, v = chip.dataset.v;
-    if (chip.classList.contains('selected')) {
-      chip.classList.remove('selected');
+document.querySelectorAll('.chip, .swatch').forEach(el => {
+  el.addEventListener('click', () => {
+    const g = el.dataset.g, v = el.dataset.v;
+    if (el.classList.contains('selected')) {
+      el.classList.remove('selected');
       sel[g] = sel[g].filter(x => x !== v);
     } else {
       if (g === 'skin') {
         document.querySelectorAll('[data-g="skin"]').forEach(c => c.classList.remove('selected'));
         sel.skin = [];
       }
-      chip.classList.add('selected');
+      el.classList.add('selected');
       sel[g].push(v);
     }
   });
@@ -287,37 +544,34 @@ async function submitForm() {
   const wishes = document.getElementById('wishes').value.trim();
 
   if (!sel.cat.length && !sel.pref.length && !sel.skin.length && !wishes) {
-    status.textContent = 'Выбери хотя бы что-нибудь 😊';
+    status.textContent = 'Выбери хотя бы что-нибудь';
     return;
   }
 
   btn.disabled = true;
-  status.textContent = 'Отправляем...';
+  status.textContent = 'Отправляем…';
 
   const lines = ['🎁 *Пожелания к бьюти-боксу*\n'];
-  if (sel.cat.length) lines.push('📦 *Категории:* ' + sel.cat.join(', '));
+  if (sel.cat.length)  lines.push('📦 *Категории:* ' + sel.cat.join(', '));
   if (sel.pref.length) lines.push('✨ *Предпочтения:* ' + sel.pref.join(', '));
   if (sel.skin.length) lines.push('🌿 *Тип кожи:* ' + sel.skin.join(', '));
-  if (wishes) lines.push('💬 *Пожелания:* ' + wishes);
-
-  const text = lines.join('\n');
+  if (wishes)          lines.push('💬 *Пожелания:* ' + wishes);
 
   try {
     const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' })
+      body: JSON.stringify({ chat_id: CHAT_ID, text: lines.join('\n'), parse_mode: 'Markdown' })
     });
     const data = await res.json();
     if (data.ok) {
       document.getElementById('form-view').style.display = 'none';
-      document.getElementById('success-view').style.display = 'block';
-    } else {
-      throw new Error(data.description);
-    }
-  } catch(e) {
+      document.getElementById('success-view').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else throw new Error();
+  } catch {
     btn.disabled = false;
-    status.textContent = 'Что-то пошло не так, попробуй ещё раз 😔';
+    status.textContent = 'Что-то пошло не так, попробуй ещё раз';
   }
 }
 </script>
