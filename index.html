@@ -5,80 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beauty Box</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --rose:    #e8c4c4;
-  --sage:    #c4d4c4;
-  --sand:    #e8ddd0;
-  --blush:   #f5ece8;
-  --cream:   #faf7f4;
-  --ink:     #1a1614;
-  --muted:   #8a7f7a;
-  --border:  #e2d8d0;
+  --bg:      #f7f3ef;
+  --card:    #ffffff;
+  --ink:     #1c1714;
+  --muted:   #9b8f87;
+  --border:  #e8e0d8;
+  --accent:  #c9a99a;
+  --rose:    #f5ece8;
+  --sage:    #eaf0eb;
+  --lavender:#eeebf5;
+  --peach:   #f5ede4;
+  --sky:     #e8f0f5;
+  --mint:    #e8f5ef;
+  --blush:   #f5e8ef;
+  --sand:    #f5f0e8;
 }
 
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── HERO ── */
+/* HERO */
 .hero {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 32px 64px;
+  background: #ede7e0;
+  padding: 64px 28px 56px;
   position: relative;
-  background: linear-gradient(170deg, #f0e8e4 0%, #e8ddd8 40%, #ddd4cc 100%);
   overflow: hidden;
 }
 
-.hero-bg-text {
+.hero::before {
+  content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(120px, 25vw, 220px);
-  font-weight: 300;
-  font-style: italic;
-  color: rgba(255,255,255,0.35);
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: -0.02em;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: #e0d4cc;
+  top: -80px; right: -80px;
 }
 
-.hero-eyebrow {
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: #d8ccc4;
+  bottom: -60px; left: 40px;
+}
+
+.hero-inner { position: relative; z-index: 1; }
+
+.hero-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.6);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(52px, 12vw, 96px);
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(36px, 9vw, 64px);
   font-weight: 300;
-  line-height: 1.0;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   color: var(--ink);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
-.hero h1 em {
-  font-style: italic;
-  color: #7a6060;
+.hero h1 span {
+  color: var(--accent);
 }
 
 .hero-sub {
@@ -86,203 +94,224 @@ body {
   font-weight: 300;
   color: var(--muted);
   line-height: 1.7;
-  max-width: 360px;
-  margin-bottom: 40px;
+  max-width: 300px;
+  margin-bottom: 36px;
 }
 
-.hero-scroll {
-  display: flex;
+.hero-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  cursor: pointer;
-  width: fit-content;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  transition: opacity 0.2s;
 }
+.hero-btn:hover { opacity: 0.8; }
 
-.hero-scroll-line {
-  width: 40px;
-  height: 1px;
-  background: var(--muted);
-  transition: width 0.3s;
-}
-
-.hero-scroll:hover .hero-scroll-line { width: 70px; }
-
-/* ── FORM SECTION ── */
-.form-section {
-  padding: 80px 32px 100px;
-  max-width: 680px;
+/* FORM */
+.form-wrap {
+  padding: 48px 28px 80px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
-/* ── BLOCK ── */
-.block {
-  margin-bottom: 72px;
+/* STEP */
+.step {
+  margin-bottom: 56px;
 }
 
-.block-num {
+.step-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.step-num {
+  font-family: 'Unbounded', sans-serif;
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.05em;
 }
 
-.block-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 6vw, 48px);
+.step-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(18px, 4vw, 24px);
   font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  margin-bottom: 28px;
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
 
-/* ── CHIPS ── */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
+/* SWATCH GRID */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
-.chip {
-  padding: 11px 20px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--muted);
-  font-size: 13px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+.swatch {
+  border-radius: 16px;
+  padding: 18px 16px;
   cursor: pointer;
-  transition: all 0.2s;
+  border: 2px solid transparent;
+  transition: border-color 0.18s, transform 0.12s;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.swatch:active { transform: scale(0.97); }
+
+.swatch-n  { background: var(--rose); }
+.swatch-b  { background: var(--sage); }
+.swatch-m  { background: var(--lavender); }
+.swatch-p  { background: var(--peach); }
+.swatch-h  { background: var(--sky); }
+.swatch-mk { background: var(--mint); }
+.swatch-t  { background: var(--blush); }
+.swatch-l  { background: var(--sand); }
+
+.swatch.selected { border-color: var(--ink); }
+
+.swatch-dot {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.swatch-dot svg { width: 10px; height: 10px; }
+.swatch.selected .swatch-dot { display: flex; }
+
+.swatch-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+  padding-right: 28px;
+}
+.swatch-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* CHIPS */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.18s;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
+.chip:hover { border-color: var(--ink); color: var(--ink); }
+.chip.selected { background: var(--ink); border-color: var(--ink); color: #fff; }
 
-.chip:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+/* TEXTAREA */
+.textarea-wrap {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  padding: 20px;
+  transition: border-color 0.2s;
 }
-
-.chip.selected {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
-}
-
-/* ── SKIN CHIPS (colored) ── */
-.chip[data-g="skin"].selected { background: #8a7a6a; border-color: #8a7a6a; }
-
-/* ── TEXTAREA ── */
-.field-wrap {
-  position: relative;
-}
-
-.field-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
+.textarea-wrap:focus-within { border-color: var(--ink); }
 
 textarea {
   width: 100%;
-  padding: 20px 0;
   border: none;
-  border-bottom: 1px solid var(--border);
   background: transparent;
   color: var(--ink);
-  font-size: 16px;
+  font-size: 15px;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   line-height: 1.7;
   resize: none;
   outline: none;
-  transition: border-color 0.2s;
+  min-height: 100px;
 }
+textarea::placeholder { color: #c8bdb7; }
 
-textarea::placeholder { color: #c0b8b0; }
-textarea:focus { border-bottom-color: var(--ink); }
-
-/* ── SUBMIT ── */
-.submit-wrap {
-  margin-top: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.submit-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 7vw, 56px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.1;
-  color: var(--ink);
-}
-
-.send-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 40px;
-  border-radius: 999px;
-  border: none;
+/* SUBMIT */
+.submit-block {
   background: var(--ink);
-  color: #fff;
-  font-size: 13px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s;
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
   margin-top: 8px;
 }
 
-.send-btn:hover { background: #3a2e2a; transform: translateY(-1px); }
-.send-btn:active { transform: translateY(0); }
-.send-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
-
-.btn-arrow {
-  width: 18px;
-  height: 18px;
-  border: 1px solid rgba(255,255,255,0.5);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  flex-shrink: 0;
+.submit-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
 }
+
+.submit-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+.send-btn:hover { opacity: 0.9; }
+.send-btn:active { transform: scale(0.98); }
+.send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .status {
   font-size: 13px;
-  color: var(--muted);
-  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.5);
+  margin-top: 12px;
   min-height: 18px;
 }
 
-/* ── DIVIDER ── */
-.divider {
-  width: 40px;
+/* DIVIDER */
+.div {
   height: 1px;
   background: var(--border);
-  margin: 0 0 72px;
+  margin: 0 0 56px;
 }
 
-/* ── SUCCESS ── */
+/* SUCCESS */
 .success {
   display: none;
   min-height: 100svh;
@@ -290,30 +319,34 @@ textarea:focus { border-bottom-color: var(--ink); }
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 60px 32px;
-  background: linear-gradient(160deg, #f0ebe6 0%, #e8e0d8 100%);
+  padding: 60px 28px;
+  background: #ede7e0;
 }
 
-.success-eyebrow {
+.success-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.6);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .success h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(48px, 10vw, 80px);
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(28px, 8vw, 52px);
   font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   color: var(--ink);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-.success h2 em { font-style: italic; color: #7a6060; }
+.success h2 span { color: var(--accent); }
 
 .success p {
   font-size: 15px;
@@ -321,142 +354,85 @@ textarea:focus { border-bottom-color: var(--ink); }
   color: var(--muted);
   line-height: 1.7;
 }
-
-/* ── COLOR SWATCHES for categories ── */
-.swatch-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
-}
-
-.swatch {
-  border-radius: 16px;
-  padding: 20px 16px 16px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.2s;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  overflow: hidden;
-}
-
-.swatch:nth-child(1) { background: #f5e8e8; }
-.swatch:nth-child(2) { background: #e8ede8; }
-.swatch:nth-child(3) { background: #ede8f0; }
-.swatch:nth-child(4) { background: #f0ece4; }
-.swatch:nth-child(5) { background: #e4ecf0; }
-.swatch:nth-child(6) { background: #f0e8f0; }
-.swatch:nth-child(7) { background: #e8f0e8; }
-.swatch:nth-child(8) { background: #f5ede4; }
-
-.swatch-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-
-.swatch-desc {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.swatch.selected {
-  border-color: var(--ink);
-}
-
-.swatch-check {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--ink);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.swatch-check svg { width: 10px; height: 10px; }
-
-.swatch.selected .swatch-check { display: flex; }
 </style>
 </head>
 <body>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-text">Beauty</div>
-  <div class="hero-eyebrow">Персональный подбор</div>
-  <h1>Твой<br><em>beauty</em><br>бокс</h1>
-  <p class="hero-sub">Расскажи, что тебе нравится — и скоро тебя ждёт что-то особенное</p>
-  <a class="hero-scroll" href="#form">
-    <div class="hero-scroll-line"></div>
-    Выбрать
-  </a>
+  <div class="hero-inner">
+    <div class="hero-tag">Персональный подбор</div>
+    <h1>Твой<br><span>beauty</span><br>бокс</h1>
+    <p class="hero-sub">Расскажи, что тебе нравится — и скоро тебя ждёт что-то особенное</p>
+    <a class="hero-btn" href="#form">
+      Выбрать
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 </section>
 
 <!-- FORM -->
 <div id="form">
-<section class="form-section" id="form-view">
+<div class="form-wrap" id="form-view">
 
-  <!-- CATEGORIES -->
-  <div class="block">
-    <div class="block-num">01</div>
-    <div class="block-title">Что хочешь<br>найти внутри?</div>
-    <div class="swatch-grid" id="swatches">
-      <div class="swatch" data-g="cat" data-v="Уход за кожей лица">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <!-- 01 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">01</span>
+      <span class="step-title">Что хочешь найти внутри?</span>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch swatch-n" data-g="cat" data-v="Уход за кожей лица">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Уход за лицом</div>
-        <div class="swatch-desc">Сыворотки, кремы</div>
+        <div class="swatch-sub">Сыворотки, кремы</div>
       </div>
-      <div class="swatch" data-g="cat" data-v="Уход за телом">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="swatch swatch-b" data-g="cat" data-v="Уход за телом">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Уход за телом</div>
-        <div class="swatch-desc">Лосьоны, скрабы</div>
+        <div class="swatch-sub">Лосьоны, скрабы</div>
       </div>
-      <div class="swatch" data-g="cat" data-v="Макияж">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="swatch swatch-m" data-g="cat" data-v="Макияж">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Макияж</div>
-        <div class="swatch-desc">Губы, глаза, лицо</div>
+        <div class="swatch-sub">Губы, глаза, лицо</div>
       </div>
-      <div class="swatch" data-g="cat" data-v="Парфюм">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="swatch swatch-p" data-g="cat" data-v="Парфюм">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Парфюм</div>
-        <div class="swatch-desc">Ароматы</div>
+        <div class="swatch-sub">Ароматы</div>
       </div>
-      <div class="swatch" data-g="cat" data-v="Уход за волосами">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="swatch swatch-h" data-g="cat" data-v="Уход за волосами">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Волосы</div>
-        <div class="swatch-desc">Маски, масла</div>
+        <div class="swatch-sub">Маски, масла</div>
       </div>
-      <div class="swatch" data-g="cat" data-v="Маски и патчи">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="swatch swatch-mk" data-g="cat" data-v="Маски и патчи">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Маски и патчи</div>
-        <div class="swatch-desc">Для лица и глаз</div>
+        <div class="swatch-sub">Для лица и глаз</div>
       </div>
-      <div class="swatch" data-g="cat" data-v="Инструменты и кисти">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="swatch swatch-t" data-g="cat" data-v="Инструменты и кисти">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Кисти и инструменты</div>
-        <div class="swatch-desc">Аксессуары</div>
+        <div class="swatch-sub">Аксессуары</div>
       </div>
-      <div class="swatch" data-g="cat" data-v="Уход за губами">
-        <div class="swatch-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="swatch swatch-l" data-g="cat" data-v="Уход за губами">
+        <div class="swatch-dot"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="swatch-name">Уход за губами</div>
-        <div class="swatch-desc">Бальзамы, скрабы</div>
+        <div class="swatch-sub">Бальзамы, скрабы</div>
       </div>
     </div>
   </div>
 
-  <div class="divider"></div>
+  <div class="div"></div>
 
-  <!-- PREFERENCES -->
-  <div class="block">
-    <div class="block-num">02</div>
-    <div class="block-title">Твои<br>предпочтения</div>
+  <!-- 02 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">02</span>
+      <span class="step-title">Предпочтения</span>
+    </div>
     <div class="chips">
       <div class="chip" data-g="pref" data-v="Натуральный состав">Натуральный состав</div>
       <div class="chip" data-g="pref" data-v="Корейская косметика">K-beauty</div>
@@ -468,12 +444,14 @@ textarea:focus { border-bottom-color: var(--ink); }
     </div>
   </div>
 
-  <div class="divider"></div>
+  <div class="div"></div>
 
-  <!-- SKIN TYPE -->
-  <div class="block">
-    <div class="block-num">03</div>
-    <div class="block-title">Тип кожи</div>
+  <!-- 03 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">03</span>
+      <span class="step-title">Тип кожи</span>
+    </div>
     <div class="chips">
       <div class="chip" data-g="skin" data-v="Сухая">Сухая</div>
       <div class="chip" data-g="skin" data-v="Жирная">Жирная</div>
@@ -483,42 +461,40 @@ textarea:focus { border-bottom-color: var(--ink); }
     </div>
   </div>
 
-  <div class="divider"></div>
+  <div class="div"></div>
 
-  <!-- WISHES -->
-  <div class="block">
-    <div class="block-num">04</div>
-    <div class="block-title">Пожелания</div>
-    <div class="field-wrap">
-      <label class="field-label" for="wishes">Расскажи свободно</label>
-      <textarea id="wishes" rows="4" placeholder="Хочу что-то с витамином C, или просто порадуй меня…"></textarea>
+  <!-- 04 -->
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">04</span>
+      <span class="step-title">Пожелания</span>
+    </div>
+    <div class="textarea-wrap">
+      <textarea id="wishes" rows="4" placeholder="Хочу что-то с витамином C, или просто порадуй меня — пиши всё что придёт в голову 😊"></textarea>
     </div>
   </div>
 
   <!-- SUBMIT -->
-  <div class="submit-wrap">
-    <div class="submit-title">Готово?<br><em>Отправляй.</em></div>
-    <button class="send-btn" id="send-btn" onclick="submitForm()">
-      Отправить пожелания
-      <div class="btn-arrow">→</div>
-    </button>
+  <div class="submit-block">
+    <div class="submit-title">Готово!</div>
+    <div class="submit-sub">Нажми кнопку — и твои пожелания<br>улетят прямо к нам</div>
+    <button class="send-btn" id="send-btn" onclick="submitForm()">Отправить пожелания 💌</button>
     <div class="status" id="status"></div>
   </div>
 
-</section>
+</div>
 </div>
 
 <!-- SUCCESS -->
 <div class="success" id="success-view">
-  <div class="success-eyebrow">Получено</div>
-  <h2>Скоро тебя<br>ждёт <em>сюрприз</em></h2>
-  <p>Пожелания отправлены.<br>Готовься к чему-то особенному 🎀</p>
+  <div class="success-tag">Получено</div>
+  <h2>Скоро тебя ждёт<br><span>сюрприз</span></h2>
+  <p>Пожелания отправлены.<br>Готовься к чему-то приятному 🎀</p>
 </div>
 
 <script>
 const BOT_TOKEN = '8505596141:AAG6Yot7CUqby-ExIDPZBkwFiYNFKoB7l58';
 const CHAT_ID = '285305161';
-
 const sel = { cat: [], pref: [], skin: [] };
 
 document.querySelectorAll('.chip, .swatch').forEach(el => {
@@ -544,7 +520,7 @@ async function submitForm() {
   const wishes = document.getElementById('wishes').value.trim();
 
   if (!sel.cat.length && !sel.pref.length && !sel.skin.length && !wishes) {
-    status.textContent = 'Выбери хотя бы что-нибудь';
+    status.textContent = 'Выбери хотя бы что-нибудь 😊';
     return;
   }
 
